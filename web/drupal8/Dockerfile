@@ -5,7 +5,8 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     npm \
     zip unzip \
-    git
+    git \
+    wget
 RUN composer self-update --2 && npm install --global gulp-cli -y
 
 
