@@ -1,18 +1,13 @@
-FROM php:7.4-fpm
+ARG  BASE_IMAGE_TAG=7.4-cli-2.x
+FROM drupaldocker/php:${BASE_IMAGE_TAG}
 
-RUN apt-get update \
-    && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev wget mysql-client git
+# Create directories for Drupal
+RUN mkdir -p /tmp/drupal && chown www-data:www-data /tmp/drupal
+RUN chown www-data:www-data /var/www
+WORKDIR /var/www/drupal
 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && :\
-    && docker-php-ext-install pdo pdo_mysql opcache zip \
-    && docker-php-ext-enable pdo pdo_mysql opcache zip
-
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-WORKDIR /code
-
-# Search engines don’t crawl
-RUN if [ -n "$NON_PROD" ] ; then printf "User-agent: *\nDisallow: /\nNoindex: /\n" > ./web/robots.txt; fi
+# Config
+ENV DOCROOT=/var/www/drupal/web
+#ADD apache.conf /etc/apache2/sites-enabled/000-default.conf
+ADD bashrc.sh /var/www/.bashrc
+ADD drushrc.php /etc/drush/drushrc.php
