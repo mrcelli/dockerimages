@@ -1,5 +1,5 @@
-FROM php:7.4-alpine
-MAINTAINER drupal-docker
+FROM php:7.4.16-alpine
+MAINTAINER mrcelli
 
 WORKDIR /var/www/html
 
