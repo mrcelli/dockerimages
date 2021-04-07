@@ -5,8 +5,7 @@ MAINTAINER drupal-docker <info@drupaldocker.org>
 WORKDIR /var/www/html
 
 # Ensure www-data user exists.
-RUN addgroup -g 82 -S www-data \
-  && adduser -u 82 -D -S -G www-data www-data
+RUN adduser -D -H -u 1000 -s /bin/bash www-data -G www-data
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY drupal.conf /etc/nginx/conf.d/default.conf
