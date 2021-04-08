@@ -1,5 +1,5 @@
 FROM drupal:8
-MAINTAINER mrcelli@icloud.com
+MAINTAINER mrcelli
 
 RUN apt-get update && apt-get install -y \
     nodejs \

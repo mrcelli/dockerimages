@@ -1,6 +1,6 @@
 FROM nginx:1.18-alpine
 
-MAINTAINER drupal-docker <info@drupaldocker.org>
+MAINTAINER mrcelli
 
 WORKDIR /var/www/html
 

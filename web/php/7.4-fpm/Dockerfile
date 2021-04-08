@@ -1,5 +1,5 @@
 FROM php:7.4.16-fpm-alpine
-MAINTAINER drupal-docker
+MAINTAINER mrcelli
 
 RUN apk add --no-cache --virtual .dd-build-deps libpng-dev libjpeg-turbo-dev postgresql-dev libxml2-dev libzip-dev oniguruma-dev $PHPIZE_DEPS \
    && docker-php-ext-configure gd --with-jpeg=/usr \
